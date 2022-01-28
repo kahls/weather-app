@@ -1,15 +1,16 @@
 import styled from 'styled-components'
-import { getConditionIcon } from '../helpers'
+import { getConditionIcon, convertFtoC } from '../helpers'
 
 function ForecastTile (props) {
-    const { day, temperature, condition } = props
+    const { day, temperature, condition, isFarenheit } = props
     const conditionIcon = getConditionIcon(condition)
+    const temperatureRender = isFarenheit ? temperature : convertFtoC(temperature)
 
     return (
         <Container>
             <Day>{day}</Day>
             {conditionIcon}
-            <Temperature>{temperature}&#176;</Temperature>
+            <Temperature>{temperatureRender}&#176;</Temperature>
         </Container>
     )
 }

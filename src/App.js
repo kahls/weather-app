@@ -1,27 +1,25 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components'
 import WeatherDisplay from './components/WeatherDisplay';
-import { formatDay } from './helpers'
 import { format } from 'date-fns'
 
 function App() {
   const [currentWeatherData, setCurrentWeatherData] = useState({})
   const [fiveDayForecastData, setFiveDayForecastData] = useState({})
+  const [isFarenheit, setIsFarenheit] = useState(true)
+  const dateString = format(new Date(), 'EEEE, MMM d, yyyy')
     
-    useEffect(()=>{
-        const fetchWeatherData = () => {
-            fetch('https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/dallas?unitGroup=us&include=current%2Cdays&key=UNZGJCFYMMV3C7S9VMS98K2E9&contentType=json')
-            .then(resp => resp.json())
-            .then(json => {
-                console.log('DATA: ', json)
-                setCurrentWeatherData(json.currentConditions)
-                setFiveDayForecastData(json.days.slice(0, 5))
-            })
-        }
-        fetchWeatherData()
-    }, [])
-
-    const dateString = format(new Date(), 'EEEE, MMM d, yyyy')
+  useEffect(()=>{
+      const fetchWeatherData = () => {
+          fetch('https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/dallas?unitGroup=us&include=current%2Cdays&key=UNZGJCFYMMV3C7S9VMS98K2E9&contentType=json')
+          .then(resp => resp.json())
+          .then(json => {
+              setCurrentWeatherData(json.currentConditions)
+              setFiveDayForecastData(json.days.slice(0, 5))
+          })
+      }
+      fetchWeatherData()
+  }, [])
 
   return (
     <AppContainer className="App">
@@ -30,6 +28,8 @@ function App() {
       <WeatherDisplay
         currentWeatherData={currentWeatherData}
         fiveDayForecastData={fiveDayForecastData}
+        isFarenheit={isFarenheit}
+        setIsFarenheit={(status)=>setIsFarenheit(status)}
       />
     </AppContainer>
   );

@@ -45,3 +45,7 @@ export const formatDay = (index, fullDay) => {
             break
     }
 }
+
+export const convertFtoC = (fDegree) => {
+    return Math.floor((fDegree - 32) * (5/9))
+}

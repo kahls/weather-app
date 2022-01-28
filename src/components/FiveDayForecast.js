@@ -4,16 +4,19 @@ import { formatDay } from '../helpers'
 import React from 'react'
 
 function FiveDayForecast (props) {
+    const { data, isFarenheit } = props
+
     return (
         <Container>
-            {props.data && props.data.length > 0 && (
+            {data && data.length > 0 && (
                 <React.Fragment>
-                    {props.data.map((day,index) => 
+                    {data.map((day,index) => 
                         <ForecastTile
                             key={index}
                             day={formatDay(new Date(day.datetime).getUTCDay())}
                             condition={day.icon}
                             temperature={Math.floor(day.temp)}
+                            isFarenheit={isFarenheit}
                         />
                     )}
                 </React.Fragment>

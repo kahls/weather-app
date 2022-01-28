@@ -1,14 +1,16 @@
 import styled from 'styled-components'
 import { getConditionIcon } from '../helpers'
-import { PartlyCloudIcon } from './Icons'
+import { convertFtoC } from '../helpers'
 
 function CurrentWeather (props) {
-    const { temperature, conditions, windSpeed, icon } = props
+    const { temperature, conditions, windSpeed, icon, isFarenheit } = props
     const conditionIcon = getConditionIcon(icon)
+
+    const temperatureRender = isFarenheit ? temperature : convertFtoC(temperature)
 
     return (
         <Container>
-            <Temperature>{temperature}&#176;</Temperature>
+            <Temperature>{temperatureRender}&#176;</Temperature>
             {conditionIcon}
             <WeatherDescription>
                 <p>{conditions}</p>

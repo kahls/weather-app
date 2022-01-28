@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import DallasImg from '../images/Dallas.png'
 import FiveDayForecast from './FiveDayForecast'
@@ -9,7 +8,7 @@ import Cloud2Image from '../images/Cloud2.png'
 
 
 function WeatherDisplay (props) {
-    const { fiveDayForecastData, currentWeatherData } = props
+    const { fiveDayForecastData, currentWeatherData, isFarenheit, setIsFarenheit } = props
 
     return (
         <Container>
@@ -22,10 +21,14 @@ function WeatherDisplay (props) {
                     conditions={currentWeatherData.conditions}
                     windSpeed={Math.floor(currentWeatherData.windspeed)}
                     icon={currentWeatherData.icon}
+                    isFarenheit={isFarenheit}
                 />
-                <TempScaleToggle/>
+                <TempScaleToggle setIsFarenheit={setIsFarenheit} isFarenheit={isFarenheit}/>
             </TopContainer>
-            <FiveDayForecast data={fiveDayForecastData}/>
+            <FiveDayForecast 
+                data={fiveDayForecastData}
+                isFarenheit={isFarenheit}
+            />
         </Container>
     )
 }

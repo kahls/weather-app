@@ -1,9 +1,14 @@
 import styled from 'styled-components'
 
 function TempScaleToggle (props) {
+    const { isFarenheit, setIsFarenheit } = props
+
     return (
         <Container>
-            <Checkbox />
+            <Checkbox 
+                onChange={(e)=>setIsFarenheit(e.target.checked)} 
+                checked={isFarenheit}
+            />
             <Slider>
                 <OptionContainer>
                     <CelciusOption>C&#176;</CelciusOption>
