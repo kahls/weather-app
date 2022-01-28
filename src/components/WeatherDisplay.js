@@ -1,19 +1,31 @@
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import DallasImg from '../images/Dallas.png'
 import FiveDayForecast from './FiveDayForecast'
 import CurrentWeather from './CurrentWeather'
 import TempScaleToggle from './TempScaleToggle'
+import Cloud1Image from '../images/Cloud1.png'
+import Cloud2Image from '../images/Cloud2.png'
 
 
-function WeatherDisplay () {
+function WeatherDisplay (props) {
+    const { fiveDayForecastData, currentWeatherData } = props
+
     return (
         <Container>
+            <Cloud className="cloud-1" src={Cloud1Image}/>
+            <Cloud className="cloud-2" src={Cloud2Image}/>
             <img src={DallasImg}/>
             <TopContainer>
-                <CurrentWeather/>
+                <CurrentWeather 
+                    temperature={Math.floor(currentWeatherData.temp)}
+                    conditions={currentWeatherData.conditions}
+                    windSpeed={Math.floor(currentWeatherData.windspeed)}
+                    icon={currentWeatherData.icon}
+                />
                 <TempScaleToggle/>
             </TopContainer>
-            <FiveDayForecast/>
+            <FiveDayForecast data={fiveDayForecastData}/>
         </Container>
     )
 }
@@ -30,6 +42,25 @@ const Container = styled.div`
     img {
         width: 100%;
         border-radius: 3px 3px 0 0;
+    }
+`
+
+const Cloud = styled.img`
+    position: absolute;
+    height: auto;
+
+    &.cloud-1 {
+        right: -80px;
+        top: 25%;
+        transform: translateY(-50%);
+        width: 213px;
+    }
+
+    &.cloud-2 {
+        left: -100px;
+        top: 37%;
+        transform: translateY(-50%);
+        width: 146px;
     }
 `
 

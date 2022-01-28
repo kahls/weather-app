@@ -1,12 +1,36 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components'
 import WeatherDisplay from './components/WeatherDisplay';
+import { formatDay } from './helpers'
+import { format } from 'date-fns'
 
 function App() {
+  const [currentWeatherData, setCurrentWeatherData] = useState({})
+  const [fiveDayForecastData, setFiveDayForecastData] = useState({})
+    
+    useEffect(()=>{
+        const fetchWeatherData = () => {
+            fetch('https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/dallas?unitGroup=us&include=current%2Cdays&key=UNZGJCFYMMV3C7S9VMS98K2E9&contentType=json')
+            .then(resp => resp.json())
+            .then(json => {
+                console.log('DATA: ', json)
+                setCurrentWeatherData(json.currentConditions)
+                setFiveDayForecastData(json.days.slice(0, 5))
+            })
+        }
+        fetchWeatherData()
+    }, [])
+
+    const dateString = format(new Date(), 'EEEE, MMM d, yyyy')
+
   return (
     <AppContainer className="App">
       <Location>Dallas, TX</Location>
-      <Date>Saturday, Sep 16, 2018</Date>
-      <WeatherDisplay/>
+      <DateText>{dateString}</DateText>
+      <WeatherDisplay
+        currentWeatherData={currentWeatherData}
+        fiveDayForecastData={fiveDayForecastData}
+      />
     </AppContainer>
   );
 }
@@ -27,7 +51,7 @@ const Location = styled.div`
   font-weight: 500;
 `
 
-const Date = styled.div`
+const DateText = styled.div`
   color: #fff;
   font-size: 15px;
 `

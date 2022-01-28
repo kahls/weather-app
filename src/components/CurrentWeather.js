@@ -1,14 +1,18 @@
 import styled from 'styled-components'
+import { getConditionIcon } from '../helpers'
 import { PartlyCloudIcon } from './Icons'
 
 function CurrentWeather (props) {
+    const { temperature, conditions, windSpeed, icon } = props
+    const conditionIcon = getConditionIcon(icon)
+
     return (
         <Container>
-            <Temperature>93&#176;</Temperature>
-            <PartlyCloudIcon/>
+            <Temperature>{temperature}&#176;</Temperature>
+            {conditionIcon}
             <WeatherDescription>
-                <p>Partly Cloudy</p>
-                <p>12 mph</p>
+                <p>{conditions}</p>
+                <p>{windSpeed} mph</p>
             </WeatherDescription>
         </Container>
     )
@@ -19,7 +23,7 @@ const Container = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    min-width: 225px;
+    min-width: 195px;
 `
 
 const Temperature = styled.p`
@@ -27,13 +31,14 @@ const Temperature = styled.p`
     color: #65AED5;
     text-align: center;
     margin: 0;
-    margin-top: -15px;
     font-weight: 500;
+    line-height: 1;
 `
 
 const WeatherDescription = styled.div`
     display: flex;
     flex-direction: column;
+    align-self: flex-end;
 
     p {
         font-size: 14px;

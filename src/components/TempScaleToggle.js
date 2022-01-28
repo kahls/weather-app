@@ -4,7 +4,12 @@ function TempScaleToggle (props) {
     return (
         <Container>
             <Checkbox />
-            <Slider />
+            <Slider>
+                <OptionContainer>
+                    <CelciusOption>C&#176;</CelciusOption>
+                    <FarenheitOption>F&#176;</FarenheitOption>
+                </OptionContainer>
+            </Slider>
         </Container>
     )
 }
@@ -12,13 +17,22 @@ function TempScaleToggle (props) {
 const Container = styled.label`
   position: relative;
   display: inline-block;
-  width: 55px;
+  width: 50px;
   height: 25px;
 `
 
 const Checkbox = styled.input.attrs({type: 'checkbox'})`
     display: none;
 `
+
+const Option = styled.span`
+    font-size: 14px;
+    color: #fff;
+    transition: color .4s;
+`
+
+const CelciusOption = styled(Option)``
+const FarenheitOption = styled(Option)``
 
 const Slider = styled.span`
     position: absolute;
@@ -35,10 +49,22 @@ const Slider = styled.span`
         box-shadow: 0 0 1px #3B97D3;
     }
 
+    ${Checkbox}:checked + & {
+        ${FarenheitOption} {
+            color: #2685BD;
+        }
+    }
+
+    ${Checkbox}:not(:checked) + & {
+        ${CelciusOption} {
+            color: #2685BD;
+        }
+    }
+
     &:before {
         position: absolute;
         content: "";
-        left: 5px;
+        left: 3px;
         top: 50%;
         transform: translateY(-50%);
     
@@ -50,9 +76,21 @@ const Slider = styled.span`
         border-radius: 50%;
 
         ${Checkbox}:checked + & {
-            transform: translateX(25px) translateY(-50%);
+            transform: translateX(23px) translateY(-50%);
         }
     }
+`
+
+const OptionContainer = styled.span`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 5px;
+    box-sizing: border-box;
 `
 
 export default TempScaleToggle

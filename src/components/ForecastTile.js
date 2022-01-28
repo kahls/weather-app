@@ -1,12 +1,15 @@
 import styled from 'styled-components'
-import { PartlyCloudIcon, CloudyDrizzle, CloudySunny, CloudLightning, CloudyDrizzleSun } from './Icons'
+import { getConditionIcon } from '../helpers'
 
 function ForecastTile (props) {
+    const { day, temperature, condition } = props
+    const conditionIcon = getConditionIcon(condition)
+
     return (
         <Container>
-            <Day>Sun</Day>
-            <PartlyCloudIcon/>
-            <Temperature>92&#176;</Temperature>
+            <Day>{day}</Day>
+            {conditionIcon}
+            <Temperature>{temperature}&#176;</Temperature>
         </Container>
     )
 }
