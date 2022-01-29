@@ -11,7 +11,7 @@ function CurrentWeather (props) {
     return (
         <Container>
             <Temperature>{temperatureRender}&#176;</Temperature>
-            {conditionIcon}
+            <IconContainer>{conditionIcon}</IconContainer>
             <WeatherDescription>
                 <p>{conditions}</p>
                 <p>{windSpeed} mph</p>
@@ -26,6 +26,10 @@ const Container = styled.div`
     align-items: center;
     justify-content: space-between;
     min-width: 195px;
+
+    @media(max-width: 480px) {
+        min-width: 145px;
+    }
 `
 
 const Temperature = styled.p`
@@ -35,6 +39,22 @@ const Temperature = styled.p`
     margin: 0;
     font-weight: 500;
     line-height: 1;
+
+    @media(max-width: 480px) {
+        font-size: 40px;
+        margin-right: 10px;
+    }
+`
+const IconContainer = styled.div`
+    @media(max-width: 480px) {
+        width: 35px;
+        margin-right: 7px;
+
+        svg {
+            width: 100%;
+            height: auto;
+        }
+    }
 `
 
 const WeatherDescription = styled.div`
@@ -42,10 +62,19 @@ const WeatherDescription = styled.div`
     flex-direction: column;
     align-self: flex-end;
 
+    @media(max-width: 480px) {
+        align-self: center;
+    }
+
     p {
         font-size: 14px;
         color: #65AED5;
         margin: 0;
+
+        @media(max-width: 480px) {
+            font-weight: bold;
+            font-size: 12px;
+        }
     }
 `
 

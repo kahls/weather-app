@@ -1,3 +1,5 @@
+import styled, {keyframes} from 'styled-components'
+
 export const PartlyCloudIcon = () => {
     return (
         <svg width="45px" height="40px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -91,11 +93,11 @@ export const CloudyDrizzleSun = () => {
     )
 }
 
-export const LocationIcon = () => {
+export const LocationIcon = (props) => {
     return (
         <svg width="12px" height="16px" viewBox="0 0 12 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
             <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                <g id="Weather" transform="translate(-463.000000, -127.000000)" fill="#FFFFFF">
+                <g id="Weather" transform="translate(-463.000000, -127.000000)" fill={props.active ? '#fff' : '#d3d3d3'}>
                     <g id="Location" transform="translate(463.000000, 122.000000)">
                         <path d="M6,12.304 C6.33600168,12.304 6.64799856,12.2200008 6.936,12.052 C7.22400144,11.8839992 7.45199916,11.6590014 7.62,11.377 C7.78800084,11.0949986 7.872,10.7860017 7.872,10.45 C7.872,10.1139983 7.78800084,9.80200144 7.62,9.514 C7.45199916,9.22599856 7.22400144,8.99800084 6.936,8.83 C6.64799856,8.66199916 6.33600168,8.578 6,8.578 C5.66399832,8.578 5.35500141,8.66199916 5.073,8.83 C4.79099859,8.99800084 4.56600084,9.22599856 4.398,9.514 C4.22999916,9.80200144 4.146,10.1139983 4.146,10.45 C4.146,10.9660026 4.3259982,11.4039982 4.686,11.764 C5.0460018,12.1240018 5.48399742,12.304 6,12.304 Z M6,5.212 C6.9600048,5.212 7.84199598,5.44599766 8.646,5.914 C9.43800396,6.38200234 10.0679977,7.01199604 10.536,7.804 C11.0040023,8.60800402 11.238,9.4899952 11.238,10.45 C11.238,11.1820037 11.0580018,12.0219953 10.698,12.97 C10.3859984,13.774004 9.95400276,14.6439953 9.402,15.58 C8.94599772,16.3240037 8.42400294,17.097996 7.836,17.902 C7.42799796,18.4660028 6.99600228,19.0179973 6.54,19.558 L6,20.188 L5.46,19.558 C5.00399772,19.0179973 4.57200204,18.4660028 4.164,17.902 C3.57599706,17.097996 3.05400228,16.3240037 2.598,15.58 C2.04599724,14.6439953 1.61400156,13.774004 1.302,12.97 C0.9419982,12.0219953 0.762,11.1820037 0.762,10.45 C0.762,9.4899952 0.99599766,8.60800402 1.464,7.804 C1.93200234,7.01199604 2.56199604,6.38200234 3.354,5.914 C4.15800402,5.44599766 5.0399952,5.212 6,5.212 Z" id="location_on---material"></path>
                     </g>
@@ -104,3 +106,53 @@ export const LocationIcon = () => {
         </svg>
     )
 }
+
+export const LoadingIcon = () => {
+    return (
+        <LoadingRing><div></div><div></div><div></div><div></div></LoadingRing>
+    )
+}
+
+const LoadingRingAnim = keyframes`
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+`
+
+const LoadingRing = styled.div`
+    display: inline-block;
+    position: relative;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        margin: 4px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        animation: ${LoadingRingAnim} 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: #fff transparent transparent transparent;
+
+        &:nth-child(1) {
+            animation-delay: -0.45s;
+        }
+
+        &:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+
+        &:nth-child(3) {
+            animation-delay: -0.15s;
+        }
+      }
+` 

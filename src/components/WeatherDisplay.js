@@ -42,6 +42,18 @@ const Container = styled.div`
     box-shadow: 0 0 15px 0 rgba(0,0,0,0.20);
     margin-top: 15px;
 
+    @media(max-width: 840px) {
+        width: 80%;
+    }
+
+    @media(max-width: 768px) {
+        width: 90%;
+    }
+
+    @media(max-width: 480px) {
+        width: 100%;
+    }
+
     img {
         width: 100%;
         border-radius: 3px 3px 0 0;
@@ -51,6 +63,10 @@ const Container = styled.div`
 const Cloud = styled.img`
     position: absolute;
     height: auto;
+
+    @media(max-width: 768px) {
+        display: none;
+    }
 
     &.cloud-1 {
         right: -80px;
@@ -76,6 +92,10 @@ const TopContainer = styled.div`
     justify-content: space-between;
     padding: 25px 20px;
     box-sizing: border-box;
+
+    @media(max-width: 480px) {
+        padding: 10px 20px;
+    }
 `
 
 export default WeatherDisplay

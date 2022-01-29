@@ -35,6 +35,11 @@ const Container = styled.div`
     background: #fff;
     border-radius: 0 0 3px 3px;
     height: 142px;
+
+    @media(max-width: 480px) {
+        flex-direction: column;
+        height: auto;
+    }
 `
 
 export default FiveDayForecast
