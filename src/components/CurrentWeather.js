@@ -49,6 +49,9 @@ const Container = styled.div`
     align-items: center;
     height: 50px;
 
+    @media(max-width: 480px) {
+        height: 41px;
+    }
 
     .tempDegree {
         font-size: 70%;
@@ -70,7 +73,6 @@ const Temperature = styled.p`
 
     @media(max-width: 480px) {
         font-size: 40px;
-        margin-right: 10px;
         min-width: 70px;
     }
 `
@@ -86,6 +88,7 @@ const IconContainer = styled.div`
         svg {
             width: 100%;
             height: auto;
+            margin-bottom: 1px;
         }
     }
 `
@@ -95,9 +98,9 @@ const WeatherDescription = styled.div`
     flex-direction: column;
     align-self: flex-end;
 
-    @media(max-width: 480px) {
-        align-self: center;
-    }
+    // @media(max-width: 480px) {
+    //     align-self: center;
+    // }
 
     p {
         font-size: 14px;

@@ -81,7 +81,7 @@ const Slider = styled.span`
         content: "";
         left: 3px;
         top: 50%;
-        transform: translateY(-50%);
+        transform: translateY(-50%) translateX(1px);
     
         transition: .4s;
 

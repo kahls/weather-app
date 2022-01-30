@@ -55,10 +55,12 @@ const Container = styled.div`
         }
     }
 
-    &:last-child {
-        &:after {
-            display: none;
-        }
+    @media(min-width: 480px) {
+        &:last-child {
+            &:after {
+                display: none;
+            }
+        }    
     }
 
     @media(max-width: 480px) {
@@ -98,7 +100,7 @@ const Temperature = styled.p`
     margin: 0;
 
     @media(max-width: 480px) {
-        width: 50px;
+        width: 85px;
         order: 2;
         font-size: 35px;
     }
