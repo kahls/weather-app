@@ -37,6 +37,23 @@ body .notification-container {
    transition: opacity 200ms;
 }
 
+.locationInputAnim-enter{
+  width: 0;
+}
+.locationInputAnim-exit{
+  width: 100%;
+}
+.locationInputAnim-enter-active{
+  width: 100%;
+}
+.locationInputAnim-exit-active{
+  width: 0;
+}
+.locationInputAnim-enter-active,
+.locationInputAnim-exit-active{
+  transition: width 200ms;
+}
+
 
 .slideDown-enter {
   opacity: 0;

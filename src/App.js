@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
 import WeatherDisplay from './components/WeatherDisplay';
 import { format } from 'date-fns'
-import { LocationIcon, LoadingIcon } from './components/Icons'
 import { CSSTransition } from 'react-transition-group'
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-
+import Location from './components/LocationDisplay';
 
 function App() {
   const [currentWeatherData, setCurrentWeatherData] = useState({})
@@ -61,16 +60,12 @@ function App() {
         in={true}
       >
       <ContentContainer>
-        <LocationContainer>
-          <LocationIconContainer 
-            onClick={!loading && !usingUserLocation ? () => getUserLocation() : ()=>{}}
-            loadingStatus={loading} 
-            usingUserLocation={usingUserLocation}
-          >
-            {loading ? <LoadingIcon/> : (<LocationIcon active={usingUserLocation}/>)}
-          </LocationIconContainer>
-          <Location>{locationString}</Location>
-        </LocationContainer>
+        <Location
+          locationString={locationString}
+          usingUserLocation={usingUserLocation}
+          loading={loading}
+          getUserLocation={getUserLocation}
+        />
         <DateText>{dateString}</DateText>
           <WeatherDisplay
             currentWeatherData={currentWeatherData}
@@ -104,29 +99,6 @@ const ContentContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;  
-`
-
-const LocationContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`
-
-const LocationIconContainer = styled.span`
-  cursor: ${props => !props.loadingStatus && !props.usingUserLocation ? 'pointer' : 'initial'};
-  width: 20px;
-  height: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`
-
-const Location = styled.div`
-  font-size: 18px;
-  color: #fff;
-  font-weight: 500;
-  margin-left: 8px;
 `
 
 const DateText = styled.div`
