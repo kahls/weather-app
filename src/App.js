@@ -14,6 +14,7 @@ function App() {
   const [locationString, setLocationString] = useState('Dallas, TX')
   const [isFarenheit, setIsFarenheit] = useState(true)
   const [loading, setLoading] = useState(false)
+  const [locationInputActive, setLocationInputActive] = useState(false)
   const dateString = format(new Date(), 'EEEE, MMM d, yyyy')
 
   const fetchWeatherData = (location) => {
@@ -38,7 +39,10 @@ function App() {
       const positionString = `${position.coords.latitude},${position.coords.longitude}`
       Promise.all([fetchLocationName(positionString), fetchWeatherData(positionString)])
       .then(()=>setUsingUserLocation(true))
-      .finally(()=>setLoading(false))
+      .finally(()=>{
+        setLoading(false)
+        setLocationInputActive(false)
+      })
     },
     (error)=>{
       setLoading(false)
@@ -65,6 +69,9 @@ function App() {
           usingUserLocation={usingUserLocation}
           loading={loading}
           getUserLocation={getUserLocation}
+          locationInputActive={locationInputActive}
+          setLocationInputActive={setLocationInputActive}
+
         />
         <DateText>{dateString}</DateText>
           <WeatherDisplay
@@ -104,6 +111,7 @@ const ContentContainer = styled.div`
 const DateText = styled.div`
   color: #fff;
   font-size: 15px;
+  font-weight: bold;
 `
 
 export default App;

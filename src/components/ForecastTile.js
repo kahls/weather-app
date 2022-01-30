@@ -21,7 +21,7 @@ function ForecastTile (props) {
                     }}
                 >
                     <Temperature>
-                        {temperatureRender}&#176;
+                        {temperatureRender}<span className="tempDegree">&#176;</span>
                     </Temperature>
                 </CSSTransition>
             </SwitchTransition>
@@ -66,6 +66,13 @@ const Container = styled.div`
         height: auto;
         width: 100%;
         padding: 15px 20px;
+    }
+
+    .tempDegree {
+        font-size: 80%;
+        position: relative;
+        display: inline-block;
+        transform: translateY(5%);
     }
 `
 

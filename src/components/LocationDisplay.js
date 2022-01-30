@@ -1,14 +1,13 @@
-import { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import LocationInput from './LocationInput';
 import { LocationIcon, LoadingIcon } from './Icons'
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
-function LocationDisplay({locationString, usingUserLocation, loading, getUserLocation}) { 
-    const [locationInputActive, setLocationInputActive] = useState(false)
+function LocationDisplay({locationString, usingUserLocation, loading, getUserLocation, locationInputActive, setLocationInputActive}) { 
 
-    return (
-        <LocationContainer>
+    const LocationIconRender = () => {
+        return (
             <LocationIconContainer 
                 onClick={!loading && !usingUserLocation ? () => getUserLocation() : ()=>{}}
                 loadingStatus={loading} 
@@ -16,8 +15,12 @@ function LocationDisplay({locationString, usingUserLocation, loading, getUserLoc
             >
                 {loading ? <LoadingIcon/> : (<LocationIcon active={usingUserLocation}/>)}
             </LocationIconContainer>
-            <TextInputContainer>
-                <SwitchTransition>
+        )
+    }
+
+    return (
+        <React.Fragment>
+            <SwitchTransition>
                 {locationInputActive ? (
                     <CSSTransition
                         classNames="slideRight"
@@ -27,7 +30,10 @@ function LocationDisplay({locationString, usingUserLocation, loading, getUserLoc
                             node.addEventListener("transitionend", done, false);
                         }}
                     >
-                        <LocationInput hideInput={()=>setLocationInputActive(false)}/>
+                        <LocationContainer>
+                            <LocationIconRender/>
+                            <LocationInput hideInput={()=>setLocationInputActive(false)}/>
+                        </LocationContainer>
                     </CSSTransition>
                 ) : (
                     <CSSTransition
@@ -38,12 +44,14 @@ function LocationDisplay({locationString, usingUserLocation, loading, getUserLoc
                             node.addEventListener("transitionend", done, false);
                         }}
                     >
-                        <Location onClick={()=>setLocationInputActive(true)}>{locationString}</Location>
+                        <LocationContainer>
+                            <LocationIconRender/>
+                            <Location onClick={()=>setLocationInputActive(true)}>{locationString}</Location>
+                        </LocationContainer>
                     </CSSTransition>
                 )}
-                </SwitchTransition>
-            </TextInputContainer>
-        </LocationContainer>
+            </SwitchTransition>
+        </React.Fragment>
     )
     
 }
@@ -52,6 +60,7 @@ const LocationContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: 30px;
 `
 
 const LocationIconContainer = styled.span`
@@ -68,12 +77,9 @@ const Location = styled.div`
   font-size: 18px;
   color: #fff;
   font-weight: 500;
-  margin-left: 8px;
+  margin-left: 3px;
   cursor: pointer;
-`
-
-const TextInputContainer = styled.div`
-    position: relative;
+  font-weight: bold;
 `
 
 export default LocationDisplay

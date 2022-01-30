@@ -11,8 +11,8 @@ function TempScaleToggle (props) {
             />
             <Slider>
                 <OptionContainer>
-                    <CelciusOption>C&#176;</CelciusOption>
-                    <FarenheitOption>F&#176;</FarenheitOption>
+                    <CelciusOption>C<span>&#176;</span></CelciusOption>
+                    <FarenheitOption>F<span>&#176;</span></FarenheitOption>
                 </OptionContainer>
             </Slider>
         </Container>
@@ -22,8 +22,8 @@ function TempScaleToggle (props) {
 const Container = styled.label`
   position: relative;
   display: inline-block;
-  width: 50px;
-  height: 25px;
+  width: 55px;
+  height: 27px;
 `
 
 const Checkbox = styled.input.attrs({type: 'checkbox'})`
@@ -34,6 +34,15 @@ const Option = styled.span`
     font-size: 14px;
     color: #fff;
     transition: color .4s;
+    font-weight: bold;
+
+    span {
+        font-size: 70%;
+        display: inline-block;
+        margin-left: 1px;
+        transform: translateY(-3px);
+        position: relative;
+    }
 `
 
 const CelciusOption = styled(Option)``
@@ -47,7 +56,8 @@ const Slider = styled.span`
     bottom: 0;
     transition: .4s;
     cursor: pointer;
-    background-color: #2685BD;
+    // background-color: #2685BD;
+    background-color: #66add3;
     border-radius: 34px;
 
     ${Checkbox}:focus + & {
@@ -81,7 +91,7 @@ const Slider = styled.span`
         border-radius: 50%;
 
         ${Checkbox}:checked + & {
-            transform: translateX(23px) translateY(-50%);
+            transform: translateX(26px) translateY(-50%);
         }
     }
 `
@@ -94,7 +104,7 @@ const OptionContainer = styled.span`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0px 5px;
+    padding: 0px 7px;
     box-sizing: border-box;
 `
 

@@ -29,7 +29,7 @@ function CurrentWeather (props) {
                                 node.addEventListener("transitionend", done, false);
                             }}
                         >
-                            <Temperature>{temperatureRender}&#176;</Temperature>
+                            <Temperature>{temperatureRender}<span className="tempDegree">&#176;</span></Temperature>
                         </CSSTransition>
                     </SwitchTransition>
                     <IconContainer>{conditionIcon}</IconContainer>
@@ -47,11 +47,14 @@ const Container = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    min-width: 195px;
+    height: 50px;
 
-    @media(max-width: 480px) {
-        min-width: 145px;
+
+    .tempDegree {
+        font-size: 70%;
+        position: relative;
+        display: inline-block;
+        transform: translateY(-8%);
     }
 `
 
@@ -62,7 +65,8 @@ const Temperature = styled.p`
     margin: 0;
     font-weight: 500;
     line-height: 1;
-    min-width: 90px;
+    min-width: 85px;
+    align-self: flex-start;
 
     @media(max-width: 480px) {
         font-size: 40px;
@@ -71,6 +75,10 @@ const Temperature = styled.p`
     }
 `
 const IconContainer = styled.div`
+    margin-right: 10px;
+    align-self: flex-end;
+    display: flex;
+
     @media(max-width: 480px) {
         width: 35px;
         margin-right: 7px;
@@ -95,6 +103,7 @@ const WeatherDescription = styled.div`
         font-size: 14px;
         color: #65AED5;
         margin: 0;
+        font-weight: 600;
 
         @media(max-width: 480px) {
             font-weight: bold;

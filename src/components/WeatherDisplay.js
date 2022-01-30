@@ -92,7 +92,7 @@ const TopContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 25px 20px;
+    padding: 20px 20px;
     box-sizing: border-box;
 
     @media(max-width: 480px) {
