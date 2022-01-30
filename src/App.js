@@ -4,6 +4,9 @@ import WeatherDisplay from './components/WeatherDisplay';
 import { format } from 'date-fns'
 import { LocationIcon, LoadingIcon } from './components/Icons'
 import { CSSTransition } from 'react-transition-group'
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 
 function App() {
   const [currentWeatherData, setCurrentWeatherData] = useState({})
@@ -37,6 +40,10 @@ function App() {
       Promise.all([fetchLocationName(positionString), fetchWeatherData(positionString)])
       .then(()=>setUsingUserLocation(true))
       .finally(()=>setLoading(false))
+    },
+    (error)=>{
+      setLoading(false)
+      NotificationManager.error('Cannot access location. Please enable location settings.', 'Error', 5000)
     })
   }
 
@@ -46,6 +53,7 @@ function App() {
 
   return (
     <AppContainer className="App">
+      <NotificationContainer/>
       <CSSTransition
         classNames="slideDown"
         timeout={1000}

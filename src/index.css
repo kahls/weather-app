@@ -16,6 +16,10 @@ code {
     monospace;
 }
 
+body .notification-container {
+  width: 430px;
+}
+
 .fade-enter{
    opacity: 0;
 }
