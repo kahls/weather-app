@@ -16,13 +16,15 @@ function WeatherDisplay (props) {
             <Cloud className="cloud-2" src={Cloud2Image}/>
             <img src={DallasImg}/>
             <TopContainer>
-                <CurrentWeather 
-                    temperature={Math.floor(currentWeatherData.temp)}
-                    conditions={currentWeatherData.conditions}
-                    windSpeed={Math.floor(currentWeatherData.windspeed)}
-                    icon={currentWeatherData.icon}
-                    isFarenheit={isFarenheit}
-                />
+                {currentWeatherData.temp && (
+                    <CurrentWeather
+                        temperature={Math.floor(currentWeatherData.temp)}
+                        conditions={currentWeatherData.conditions}
+                        windSpeed={Math.floor(currentWeatherData.windspeed)}
+                        icon={currentWeatherData.icon}
+                        isFarenheit={isFarenheit}
+                    />
+                )}
                 <TempScaleToggle setIsFarenheit={setIsFarenheit} isFarenheit={isFarenheit}/>
             </TopContainer>
             <FiveDayForecast 

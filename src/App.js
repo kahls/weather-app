@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
 import WeatherDisplay from './components/WeatherDisplay';
 import { format } from 'date-fns'
 import { LocationIcon, LoadingIcon } from './components/Icons'
+import { CSSTransition } from 'react-transition-group'
 
 function App() {
   const [currentWeatherData, setCurrentWeatherData] = useState({})
@@ -45,24 +46,33 @@ function App() {
 
   return (
     <AppContainer className="App">
-      <LocationContainer>
-        <LocationIconContainer 
-          onClick={!loading && !usingUserLocation ? () => getUserLocation() : ()=>{}}
-          loadingStatus={loading} 
-          usingUserLocation={usingUserLocation}
-        >
-          {loading ? <LoadingIcon/> : (<LocationIcon active={usingUserLocation}/>)}
-        </LocationIconContainer>
-        <Location>{locationString}</Location>
-      </LocationContainer>
-      <DateText>{dateString}</DateText>
-      <WeatherDisplay
-        currentWeatherData={currentWeatherData}
-        fiveDayForecastData={fiveDayForecastData}
-        isFarenheit={isFarenheit}
-        setIsFarenheit={(status)=>setIsFarenheit(status)}
-      />
-    </AppContainer>
+      <CSSTransition
+        classNames="slideDown"
+        timeout={1000}
+        appear={true}
+        in={true}
+      >
+      <ContentContainer>
+        <LocationContainer>
+          <LocationIconContainer 
+            onClick={!loading && !usingUserLocation ? () => getUserLocation() : ()=>{}}
+            loadingStatus={loading} 
+            usingUserLocation={usingUserLocation}
+          >
+            {loading ? <LoadingIcon/> : (<LocationIcon active={usingUserLocation}/>)}
+          </LocationIconContainer>
+          <Location>{locationString}</Location>
+        </LocationContainer>
+        <DateText>{dateString}</DateText>
+          <WeatherDisplay
+            currentWeatherData={currentWeatherData}
+            fiveDayForecastData={fiveDayForecastData}
+            isFarenheit={isFarenheit}
+            setIsFarenheit={(status)=>setIsFarenheit(status)}
+          />
+        </ContentContainer>
+      </CSSTransition>
+      </AppContainer>
   );
 }
 
@@ -79,6 +89,13 @@ const AppContainer = styled.div`
     justify-content: flex-start;
     padding: 20px;
   }
+`
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  
 `
 
 const LocationContainer = styled.div`

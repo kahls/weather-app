@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { getConditionIcon } from '../helpers'
 import { convertFtoC } from '../helpers'
+import { CSSTransition, SwitchTransition } from 'react-transition-group'
 
 function CurrentWeather (props) {
     const { temperature, conditions, windSpeed, icon, isFarenheit } = props
@@ -9,14 +10,36 @@ function CurrentWeather (props) {
     const temperatureRender = isFarenheit ? temperature : convertFtoC(temperature)
 
     return (
-        <Container>
-            <Temperature>{temperatureRender}&#176;</Temperature>
-            <IconContainer>{conditionIcon}</IconContainer>
-            <WeatherDescription>
-                <p>{conditions}</p>
-                <p>{windSpeed} mph</p>
-            </WeatherDescription>
-        </Container>
+        <SwitchTransition>
+            <CSSTransition
+                key={windSpeed}
+                classNames="quickSlideDown"
+                timeout={400}
+                addEndListener={(node, done) => {
+                    node.addEventListener("transitionend", done, false);
+                }}
+            >
+                <Container>
+                    <SwitchTransition>  
+                        <CSSTransition
+                            key={temperatureRender}
+                            classNames="fade"
+                            timeout={200}
+                            addEndListener={(node, done) => {
+                                node.addEventListener("transitionend", done, false);
+                            }}
+                        >
+                            <Temperature>{temperatureRender}&#176;</Temperature>
+                        </CSSTransition>
+                    </SwitchTransition>
+                    <IconContainer>{conditionIcon}</IconContainer>
+                    <WeatherDescription>
+                        <p>{conditions}</p>
+                        <p>{windSpeed} mph</p>
+                    </WeatherDescription>
+                </Container>
+            </CSSTransition>
+        </SwitchTransition>
     )
 }
 
@@ -39,10 +62,12 @@ const Temperature = styled.p`
     margin: 0;
     font-weight: 500;
     line-height: 1;
+    min-width: 90px;
 
     @media(max-width: 480px) {
         font-size: 40px;
         margin-right: 10px;
+        min-width: 70px;
     }
 `
 const IconContainer = styled.div`

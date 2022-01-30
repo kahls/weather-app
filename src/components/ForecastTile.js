@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { getConditionIcon, convertFtoC } from '../helpers'
+import { CSSTransition, SwitchTransition } from 'react-transition-group'
 
 function ForecastTile (props) {
     const { day, temperature, condition, isFarenheit } = props
@@ -10,7 +11,20 @@ function ForecastTile (props) {
         <Container>
             <Day>{day}</Day>
             <IconContainer>{conditionIcon}</IconContainer>
-            <Temperature>{temperatureRender}&#176;</Temperature>
+            <SwitchTransition>  
+                <CSSTransition
+                    key={temperatureRender}
+                    classNames="fade"
+                    timeout={200}
+                    addEndListener={(node, done) => {
+                        node.addEventListener("transitionend", done, false);
+                    }}
+                >
+                    <Temperature>
+                        {temperatureRender}&#176;
+                    </Temperature>
+                </CSSTransition>
+            </SwitchTransition>
         </Container>
     )
 }
@@ -71,6 +85,7 @@ const Day = styled.p`
 
 const Temperature = styled.p`
     font-size: 24px;
+    min-width: 55px;
     color: #4A4A4A;
     text-align: center;
     margin: 0;
@@ -79,7 +94,6 @@ const Temperature = styled.p`
         width: 50px;
         order: 2;
         font-size: 35px;
-        text-align: left;
     }
 `
 
