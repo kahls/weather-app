@@ -72,23 +72,23 @@ code {
   transform: translateY(-10px);
 }
 
-.quickSlideDown-enter{
+.slideRight-enter{
    opacity: 0;
    transform: translateX(-10px);
 }
-.quickSlideDown-exit{
+.slideRight-exit{
    opacity: 1;
    transform: translateX(0px);
 }
-.quickSlideDown-enter-active{
+.slideRight-enter-active{
    opacity: 1;
    transform: translateX(0px);
 }
-.quickSlideDown-exit-active{
+.slideRight-exit-active{
    opacity: 0;
    transform: translateX(-10px);
 }
-.quickSlideDown-enter-active,
-.quickSlideDown-exit-active{
+.slideRight-enter-active,
+.slideRight-exit-active{
    transition: opacity 400ms ease-out, transform 400ms ease-out;
 }

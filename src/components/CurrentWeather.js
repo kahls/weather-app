@@ -13,7 +13,7 @@ function CurrentWeather (props) {
         <SwitchTransition>
             <CSSTransition
                 key={windSpeed}
-                classNames="quickSlideDown"
+                classNames="slideRight"
                 timeout={400}
                 addEndListener={(node, done) => {
                     node.addEventListener("transitionend", done, false);

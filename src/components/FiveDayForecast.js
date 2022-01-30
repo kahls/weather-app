@@ -12,17 +12,16 @@ function FiveDayForecast (props) {
             {data && data.length > 0 && (
                 <React.Fragment>
                     {data.map((day,index) => 
-                        <SwitchTransition>
+                        <SwitchTransition key={index}>
                             <CSSTransition
-                                key={day.temp}
-                                classNames="quickSlideDown"
+                                key={day.temp + day.datetime}
+                                classNames="slideRight"
                                 timeout={400}
                                 addEndListener={(node, done) => {
                                     node.addEventListener("transitionend", done, false);
                                 }}
                             >
                                 <ForecastTile
-                                    key={index}
                                     day={formatDay(new Date(day.datetime).getUTCDay())}
                                     condition={day.icon}
                                     temperature={Math.floor(day.temp)}
