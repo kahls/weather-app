@@ -56,10 +56,21 @@ function App() {
       return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${zipCode}&key=AIzaSyBSEbeJG1Cf29i8fBVfBBdzVvnNUlE-6Q8`)
       .then(resp => resp.json())
       .then(json => {
-        const positionString = `${json.results[0].geometry.location.lat}, ${json.results[0].geometry.location.lng}`
-        // Streamwood, IL 60107, USA
-        setLocationString(json.results[0].formatted_address.split(',').slice(0,2).join(',').split(',').join(',').split(' ').slice(0, 2).join(' '))
-        fetchWeatherData(positionString)
+        let zipResult = {}
+        json.results.every(result => {
+          if (result.types.includes('postal_code')) {
+            zipResult = result
+            return false
+          }
+          else return true
+        })
+        if (Object.keys(zipResult).length > 0) {
+          const positionString = `${zipResult.geometry.location.lat}, ${zipResult.geometry.location.lng}`
+          setLocationString(zipResult.formatted_address.split(',').slice(0,2).join(',').split(',').join(',').split(' ').slice(0, 2).join(' '))
+          fetchWeatherData(positionString)
+        }
+        else NotificationManager.error('Zip code not found', '', 4000)
+        
       })
       .catch (err => console.log(err))
       .finally(()=>{

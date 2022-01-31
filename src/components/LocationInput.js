@@ -1,12 +1,17 @@
 import { useState } from 'react'
 import styled from 'styled-components'
+import {NotificationManager} from 'react-notifications'
 
 function LocationInput(props) {
     const [inputText, setInputText] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        props.getWeatherByZip(inputText)
+        const zipReg = new RegExp(/^((\d{5}-\d{4})|(\d{5})|([A-Z]\d[A-Z]\s\d[A-Z]\d))$/)
+        if (zipReg.test(inputText)) {
+            props.getWeatherByZip(inputText)
+        }
+        else NotificationManager.error('Please enter a valid zip code.', '', 4000)
     }
 
     return (
