@@ -87,11 +87,12 @@ const Day = styled.p`
     margin-bottom: 10px;
 
     @media(max-width: 480px) {
-        font-size: 20px;
+        font-size: 16px;
         width: 45px;
         text-align: left;
         order: 1;
         margin-bottom: 0;
+        font-weight: 500;
     }
 `
 
@@ -107,6 +108,7 @@ const Temperature = styled.p`
         width: 85px;
         order: 2;
         font-size: 35px;
+        font-weight: 400;
     }
 `
 

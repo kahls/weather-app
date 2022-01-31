@@ -11,12 +11,6 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-@media(max-width: 480px) {
-  body {
-    overflow-x: hidden;
-  }
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -118,4 +112,14 @@ body .notification-container {
 .slideRight-enter-active,
 .slideRight-exit-active{
    transition: opacity 400ms ease-out, transform 400ms ease-out;
+}
+
+@media(max-width: 480px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  body .notification-container {
+    width: 90%;
+  }
 }
