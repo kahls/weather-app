@@ -1,29 +1,30 @@
-import { PartlyCloudIcon, CloudyDrizzle, CloudySunny, CloudLightning, CloudyDrizzleSun } from './components/Icons'
+import { WiDaySnow, WiDayRain, WiFog, WiWindy, WiCloudy, WiNightAltPartlyCloudy, WiDayCloudy, WiDaySunny, WiNightClear} from "react-icons/wi";
 
 export const getConditionIcon = (conditionStatus) => {
     switch(conditionStatus) {
         case 'snow':
-            return <CloudyDrizzle/>
+            return <WiDaySnow color="#65aed5" size="45"/>
         case 'rain':
-            return <CloudyDrizzle/>
+            return <WiDayRain color="#65aed5" size="45"/>
         case 'fog':
-            return <PartlyCloudIcon/>
+            return <WiFog color="#65aed5" size="45"/>
         case 'wind':
-            return <PartlyCloudIcon/>
+            return <WiWindy color="#65aed5" size="45"/>
         case 'cloudy':
-            return <PartlyCloudIcon/>
+            return <WiCloudy color="#65aed5" size="45"/>
         case 'partly-cloudy-day':
-            return <PartlyCloudIcon/>
+            return <WiDayCloudy color="#65aed5" size="45"/>
         case 'partly-cloudy-night':
-            return <PartlyCloudIcon/>
+            return <WiNightAltPartlyCloudy color="#65aed5" size="45"/>
         case 'clear-day':
-            return <CloudySunny/>
+            return <WiDaySunny color="#65aed5" size="45"/>
         case 'clear-night':
-            return <CloudySunny/>
+            return <WiNightClear color="#65aed5" size="45"/>
         default:
             break;
     }   
 }
+
 
 export const formatDay = (index, fullDay) => {
     switch (index) {
