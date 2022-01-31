@@ -1,9 +1,19 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 
 function LocationInput(props) {
+    const [inputText, setInputText] = useState('')
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        props.getWeatherByZip(inputText)
+    }
+
     return (
         <Container>
-            <Input type="text" placeholder="Search City or Zip Code"/>
+            <form onSubmit={(e)=>handleSubmit(e)}>
+                <Input type="text" placeholder="Search Zip Code" onChange={(e) => setInputText(e.target.value)}/>
+            </form>
             <CloseButton onClick={props.hideInput}>&#215;</CloseButton>
         </Container>
     )
@@ -15,7 +25,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     width: 200px;
-    padding: 5px 15px;
+    padding: 3px 15px;
     background: #ffffff40;
     border-radius: 15px;
     box-sizing: border-box;

@@ -50,6 +50,27 @@ function App() {
     })
   }
 
+  const getWeatherByZip = (zipCode) => {
+    setLoading(true)
+    const searchZipCode = (zipCode) => {
+      return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${zipCode}&key=AIzaSyBSEbeJG1Cf29i8fBVfBBdzVvnNUlE-6Q8`)
+      .then(resp => resp.json())
+      .then(json => {
+        const positionString = `${json.results[0].geometry.location.lat}, ${json.results[0].geometry.location.lng}`
+        // Streamwood, IL 60107, USA
+        setLocationString(json.results[0].formatted_address.split(',').slice(0,2).join(',').split(',').join(',').split(' ').slice(0, 2).join(' '))
+        fetchWeatherData(positionString)
+      })
+      .catch (err => console.log(err))
+      .finally(()=>{
+        setLoading(false)
+        setLocationInputActive(false)
+      })
+    }
+
+    searchZipCode(zipCode)
+  }
+
   useEffect(()=>{
     fetchWeatherData('dallas')
   }, [])
@@ -71,6 +92,7 @@ function App() {
           getUserLocation={getUserLocation}
           locationInputActive={locationInputActive}
           setLocationInputActive={setLocationInputActive}
+          getWeatherByZip={getWeatherByZip}
 
         />
         <DateText>{dateString}</DateText>

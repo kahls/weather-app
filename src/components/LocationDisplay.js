@@ -4,7 +4,7 @@ import LocationInput from './LocationInput';
 import { LocationIcon, LoadingIcon } from './Icons'
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
-function LocationDisplay({locationString, usingUserLocation, loading, getUserLocation, locationInputActive, setLocationInputActive}) { 
+function LocationDisplay({locationString, usingUserLocation, loading, getUserLocation, locationInputActive, setLocationInputActive, getWeatherByZip}) { 
 
     const LocationIconRender = () => {
         return (
@@ -32,7 +32,10 @@ function LocationDisplay({locationString, usingUserLocation, loading, getUserLoc
                     >
                         <LocationContainer>
                             <LocationIconRender/>
-                            <LocationInput hideInput={()=>setLocationInputActive(false)}/>
+                            <LocationInput 
+                                hideInput={()=>setLocationInputActive(false)}
+                                getWeatherByZip={getWeatherByZip}
+                            />
                         </LocationContainer>
                     </CSSTransition>
                 ) : (
