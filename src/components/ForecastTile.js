@@ -91,6 +91,7 @@ const Day = styled.p`
         width: 45px;
         text-align: left;
         order: 1;
+        margin-bottom: 0;
     }
 `
 

@@ -11,6 +11,12 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+@media(max-width: 480px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
