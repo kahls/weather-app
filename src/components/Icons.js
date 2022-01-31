@@ -127,9 +127,6 @@ const LoadingRing = styled.div`
     position: relative;
     width: 25px;
     height: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     div {
         box-sizing: border-box;
