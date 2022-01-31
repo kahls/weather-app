@@ -6,6 +6,7 @@ import { CSSTransition } from 'react-transition-group'
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import Location from './components/LocationDisplay';
+import { formatLocation } from './helpers'
 
 function App() {
   const [currentWeatherData, setCurrentWeatherData] = useState({})
@@ -66,7 +67,7 @@ function App() {
         })
         if (Object.keys(zipResult).length > 0) {
           const positionString = `${zipResult.geometry.location.lat}, ${zipResult.geometry.location.lng}`
-          setLocationString(zipResult.formatted_address.split(',').slice(0,2).join(',').split(',').join(',').split(' ').slice(0, 2).join(' '))
+          setLocationString(formatLocation(zipResult.formatted_address))
           fetchWeatherData(positionString)
         }
         else NotificationManager.error('Zip code not found', '', 4000)

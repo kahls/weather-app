@@ -7,8 +7,6 @@ function ForecastTile (props) {
     const conditionIcon = getConditionIcon(condition)
     const temperatureRender = isFarenheit ? temperature : convertFtoC(temperature)
 
-    console.log(`${day}: ${condition}`)
-
     return (
         <Container>
             <Day>{day}</Day>

@@ -50,3 +50,11 @@ export const formatDay = (index, fullDay) => {
 export const convertFtoC = (fDegree) => {
     return Math.floor((fDegree - 32) * (5/9))
 }
+
+export const formatLocation = (locationString) => {
+    const arr = locationString.split(',')
+    const cityName = arr[0]
+    const stateZip = arr[1]
+    const state = stateZip.split(' ').slice(1, 2).join('')
+    return `${cityName}, ${state}`
+}
