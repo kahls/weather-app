@@ -83,6 +83,8 @@ const Day = styled.p`
     color: #4A4A4A;
     text-align: center;
     margin: 0;
+    font-weight: bold;
+    margin-bottom: 10px;
 
     @media(max-width: 480px) {
         font-size: 20px;
@@ -98,6 +100,7 @@ const Temperature = styled.p`
     color: #4A4A4A;
     text-align: center;
     margin: 0;
+    font-weight: 500;
 
     @media(max-width: 480px) {
         width: 85px;

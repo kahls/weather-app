@@ -23,7 +23,7 @@ const Container = styled.label`
   position: relative;
   display: inline-block;
   width: 55px;
-  height: 27px;
+  height: 25px;
 `
 
 const Checkbox = styled.input.attrs({type: 'checkbox'})`
@@ -42,6 +42,12 @@ const Option = styled.span`
         margin-left: 1px;
         transform: translateY(-3px);
         position: relative;
+    }
+
+    @supports (-moz-appearance:none) {
+        & { 
+            margin-top: 2px;
+        } 
     }
 `
 
@@ -91,7 +97,7 @@ const Slider = styled.span`
         border-radius: 50%;
 
         ${Checkbox}:checked + & {
-            transform: translateX(26px) translateY(-50%);
+            transform: translateX(27px) translateY(-50%);
         }
     }
 `
