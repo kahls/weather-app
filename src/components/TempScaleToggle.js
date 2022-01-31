@@ -43,12 +43,6 @@ const Option = styled.span`
         transform: translateY(-3px);
         position: relative;
     }
-
-    @supports (-moz-appearance:none) {
-        & { 
-            margin-top: 2px;
-        } 
-    }
 `
 
 const CelciusOption = styled(Option)``
